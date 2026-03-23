@@ -45,7 +45,7 @@ The system consists of the following core domain entities:
 
 ## UML Diagram
 
-> *![alt text](image.png)*
+> *![alt text](image-1.png)*
 
 ---
 
