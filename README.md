@@ -12,13 +12,13 @@ cd cithara
 pip install django
 
 4. Run migrations
-python manage.py migrate
+python3 manage.py migrate
 
 5. Create superuser
-python manage.py createsuperuser
+python3 manage.py createsuperuser
 
 6. Run server
-python manage.py runserver
+python3 manage.py runserver
 
 7. Open browser
 http://127.0.0.1:8000/admin
