@@ -1,4 +1,27 @@
-# Music AI Django Project
+# Cithara Music AI (Django Project)
+
+## Setup Instructions
+
+1. Clone repository
+git clone https://github.com/cooldog98/cithara.git
+
+2. Enter project folder
+cd cithara
+
+3. Install Django
+pip install django
+
+4. Run migrations
+python manage.py migrate
+
+5. Create superuser
+python manage.py createsuperuser
+
+6. Run server
+python manage.py runserver
+
+7. Open browser
+http://127.0.0.1:8000/admin
 
 ## Project Overview
 
