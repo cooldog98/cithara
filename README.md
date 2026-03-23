@@ -2,25 +2,25 @@
 
 ## Setup Instructions
 
-1. Clone repository
+1. Clone repository: 
 git clone https://github.com/cooldog98/cithara.git
 
-2. Enter project folder
+2. Enter project folder: 
 cd cithara
 
-3. Install Django
+3. Install Django: 
 pip install django
 
-4. Run migrations
+4. Run migrations: 
 python3 manage.py migrate
 
-5. Create superuser
+5. Create superuser: 
 python3 manage.py createsuperuser
 
-6. Run server
+6. Run server: 
 python3 manage.py runserver
 
-7. Open browser
+7. Open browser: 
 http://127.0.0.1:8000/admin
 
 ## Project Overview
