@@ -131,3 +131,6 @@ python3 manage.py createsuperuser
 
 * Python 3
 * Django
+
+## CRUD Functionality
+> *![alt text](image-2.png)*
