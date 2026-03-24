@@ -134,3 +134,8 @@ python3 manage.py createsuperuser
 
 ## CRUD Functionality
 > *![alt text](image-2.png)*
+
+## Design Decision: User Roles
+In the initial domain model, user roles such as creator and listener were introduced to simplify the user stories. However, during implementation, it was observed that both roles share the same capabilities: users can create songs, generate music, and listen to songs without any restriction.
+
+Since there is no difference in permissions or system behavior between these roles, maintaining separate user roles would introduce unnecessary complexity and redundancy. Therefore, the role distinction was removed, and a unified User entity was used instead.

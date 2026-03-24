@@ -2,15 +2,9 @@ from django.contrib import admin
 from .models import Song, SongGenerationRequest, SongLibrary, ShareLink
 
 
-# Inline: แสดงเพลงใน Library
-class SongInline(admin.TabularInline):
-    model = Song
-    extra = 0
-
-
 # Library Admin
 class SongLibraryAdmin(admin.ModelAdmin):
-    inlines = [SongInline]
+    filter_horizontal = ('songs',)
 
 
 # Song Admin
