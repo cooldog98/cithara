@@ -82,6 +82,7 @@ python3 manage.py runserver
 
 * Main page: http://127.0.0.1:8000/
 * Admin panel: http://127.0.0.1:8000/admin
+* view all songs: http://127.0.0.1:8000/songs/
 
 ---
 
