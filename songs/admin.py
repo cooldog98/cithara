@@ -1,6 +1,5 @@
 from django.contrib import admin
-from .models import Song, SongGenerationRequest, SongLibrary, ShareLink
-
+from .models import Song, SongGenerationRequest, SongLibrary, ShareLink, GenerationJob
 
 # Library Admin
 class SongLibraryAdmin(admin.ModelAdmin):
@@ -28,9 +27,14 @@ class SongGenerationRequestAdmin(admin.ModelAdmin):
 
     formatted_date.short_description = 'Created At'
 
+# Generation Job Admin
+class GenerationJobAdmin(admin.ModelAdmin):
+    list_display = ('task_id', 'status', 'audio_url', 'created_at')
+    ordering = ('-created_at',)
 
 # Register Models
 admin.site.register(SongLibrary, SongLibraryAdmin)
 admin.site.register(Song, SongAdmin)
 admin.site.register(SongGenerationRequest, SongGenerationRequestAdmin)
 admin.site.register(ShareLink)
+admin.site.register(GenerationJob, GenerationJobAdmin)
