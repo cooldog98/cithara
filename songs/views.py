@@ -145,7 +145,7 @@ def api_login(request):
         password = data.get('password')
         user = authenticate(request, username=username, password=password)
         if user:
-            login(request, user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return JsonResponse({'success': True, 'username': user.username})
         return JsonResponse({'success': False, 'error': 'Invalid username or password'}, status=401)
 
@@ -163,7 +163,7 @@ def api_register(request):
         if User.objects.filter(username=username).exists():
             return JsonResponse({'success': False, 'error': 'Username already exists'}, status=400)
         user = User.objects.create_user(username=username, password=password)
-        login(request, user)
+        login(request, user, backend='django.contrib.auth.backends.ModelBackend')
         return JsonResponse({'success': True, 'username': user.username})
     
 @csrf_exempt
