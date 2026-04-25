@@ -126,7 +126,6 @@ cithara/
 
 ```bash
 git clone <your-repo-url>
-cd cithara
 ```
 
 ### 2. Create a virtual environment
@@ -144,7 +143,7 @@ pip install django django-allauth django-cors-headers python-dotenv requests pil
 
 ### 4. Configure environment variables
 
-Create a `.env` file in the project root:
+open a `.env.example` file in the project root:
 
 ```env
 GENERATOR_STRATEGY=mock
@@ -167,7 +166,6 @@ python3 manage.py migrate
 ```bash
 cd frontend
 npm install
-cd ..
 ```
 
 ### 7. Start the backend
@@ -183,7 +181,6 @@ Backend runs at `http://127.0.0.1:8000`
 In another terminal:
 
 ```bash
-cd frontend
 npm run dev
 ```
 
