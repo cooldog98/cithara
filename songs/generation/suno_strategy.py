@@ -51,8 +51,19 @@ class SunoSongGeneratorStrategy(SongGeneratorStrategy):
             data = response.json()
             print(f"[SUNO] Full response: {data}")
             inner = data.get("data") or {}
-            status = inner.get("status") or data.get("status", "PENDING")
-            audio_url = inner.get("audioUrl") or data.get("audioUrl")
-            return GenerationResult(task_id=task_id, status=status, audio_url=audio_url)
+            status = inner.get("status", "PENDING")
+            audio_url = None
+            response_data = inner.get("response") or {}
+            suno_data = response_data.get("sunoData", [])
+            if suno_data:
+                audio_url = (
+                    suno_data[0].get("audioUrl") or
+                    suno_data[0].get("streamAudioUrl")
+                )
+                cover_image = suno_data[0].get("imageUrl")
+            return GenerationResult(task_id=task_id, 
+                                    status=status, 
+                                    audio_url=audio_url, 
+                                    cover_image=cover_image,)
         except requests.RequestException as e:
             return GenerationResult(task_id=task_id, status="ERROR", error=str(e))

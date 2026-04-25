@@ -1,0 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: '#E5DED2';
+  min-height: 100vh;
+}
+
+body {
+  /* overflow: hidden; this one make the page can not scroll*/ 
+  height: 100vh;
+}

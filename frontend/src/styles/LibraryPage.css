@@ -1,0 +1,47 @@
+.btn-playlist:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+.btn-playlist:active {
+    transform: scale(0.95);
+}
+
+.btn-share:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+.btn-share:active {
+    transform: scale(0.95);
+}
+
+.btn-delete:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+.btn-delete:active {
+    transform: scale(0.95);
+}
+
+.btn-download:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+.btn-download:active {
+    transform: scale(0.95);
+}
+
+.btn-addplay:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+.btn-addplay:active {
+    transform: scale(0.95);
+}
+
+.btn-cancen:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+.btn-cancen:active {
+    transform: scale(0.95);
+}

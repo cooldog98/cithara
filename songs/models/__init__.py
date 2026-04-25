@@ -3,3 +3,4 @@ from .song_library import SongLibrary
 from .song_generation_request import SongGenerationRequest
 from .share_link import ShareLink
 from .generation_job import GenerationJob
+from .playlist import Playlist

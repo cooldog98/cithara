@@ -1,0 +1,67 @@
+.btn-addsong:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+.btn-addsong:active {
+    transform: scale(0.95);
+}
+
+.btn-play:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+.btn-play:active {
+    transform: scale(0.95);
+}
+
+.btn-song:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+.btn-song:active {
+    transform: scale(0.95);
+}
+
+.btn-back:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+.btn-back:active {
+    transform: scale(0.95);
+}
+
+.btn-add_pl:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+.btn-add_pl:active {
+    transform: scale(0.95);
+}
+
+.btn-done:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+.btn-done:active {
+    transform: scale(0.95);
+}
+
+.btn-choose:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+.btn-choose:active {
+    transform: scale(0.95);
+}
+
+.song-item {
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #353535;
+    transition: box-shadow 0.3s ease;
+}
+  
+.song-item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* เพิ่มเงาเมื่อ hover */
+}

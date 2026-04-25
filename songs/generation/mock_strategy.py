@@ -8,7 +8,7 @@ class MockSongGeneratorStrategy(SongGeneratorStrategy):
         return GenerationResult(
             task_id=fake_task_id,
             status="SUCCESS",
-            audio_url="https://example.com/mock-audio.mp3",
+            audio_url="http://127.0.0.1:8000/media/songs/songformock/mock_song.mp3",
         )
 
     def get_status(self, task_id: str) -> GenerationResult:
@@ -16,5 +16,5 @@ class MockSongGeneratorStrategy(SongGeneratorStrategy):
         return GenerationResult(
             task_id=task_id,
             status="SUCCESS",
-            audio_url="https://example.com/mock-audio.mp3",
+            audio_url="http://127.0.0.1:8000/media/songs/songformock/mock_song.mp3",
         )

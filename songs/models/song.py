@@ -9,6 +9,7 @@ class Song(models.Model):
 
     title = models.CharField(max_length=255)
     duration = models.IntegerField(null=True, blank=True)
+    cover_image = models.ImageField(upload_to='covers/', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
