@@ -187,29 +187,45 @@ cd frontend
 npm run dev
 ```
 
-Frontend runs at `http://localhost:5173` or `http://127.0.0.1:5173`
+Frontend runs at `http://127.0.0.1:5173`
 
-<!-- ## Authentication
+Use `127.0.0.1` consistently for both frontend and backend during local OAuth testing.
+Mixing `localhost` and `127.0.0.1` can cause Google login redirect/session issues.
 
-### Username / Password
+## Google Login Setup
 
-The app supports local registration and login from the frontend landing page.
+Google sign-in is implemented with `django-allauth`.
 
-### Google Login
+### 1) Create a Google OAuth client
 
-Google sign-in is wired through `django-allauth`. To make it work locally, you need:
+In Google Cloud Console, create an **OAuth 2.0 Client ID** with type **Web application**.
 
-1. A Google OAuth client
-2. A configured `SocialApp` entry in Django admin
-3. The correct callback URL in Google Cloud Console
+- Authorized redirect URI:
+  - `http://127.0.0.1:8000/accounts/google/login/callback/`
 
-Typical local callback URL:
+### 2) Configure Django Site and SocialApp
 
-```text
-http://127.0.0.1:8000/accounts/google/login/callback/
-```
+Open Django admin at `http://127.0.0.1:8000/admin` and configure:
 
-You also need to ensure the Django `Site` and the Google `SocialApp` are linked correctly. -->
+- `Sites`:
+  - Domain: `127.0.0.1:8000`
+  - Display name: any value (for example `127.0.0.1:8000`)
+- `Social applications`:
+  - Provider: `Google`
+  - Client ID / Secret: from Google Cloud Console
+  - Chosen sites: include the site above
+
+### 3) Run both servers
+
+- Backend: `python3 manage.py runserver 127.0.0.1:8000`
+- Frontend: `cd frontend && npm run dev`
+
+Open the app at `http://127.0.0.1:5173` and use **Login with Google**.
+
+### 4) Important local dev note
+
+Use `127.0.0.1` consistently for both backend and frontend.
+Do not mix `localhost` and `127.0.0.1`, because OAuth redirect/session behavior can break across hostnames.
 
 ## Song Generation Modes
 
