@@ -166,6 +166,7 @@ python3 manage.py migrate
 ```bash
 cd frontend
 npm install
+npm install react-icons
 ```
 
 ### 7. Start the backend
