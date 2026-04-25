@@ -107,6 +107,20 @@ export default function GeneratePage() {
         }
     }, [])
 
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const res = await axios.get(`${API}/api/me/`, { withCredentials: true })
+                if (res.data.authenticated) {
+                    localStorage.setItem('username', res.data.username)
+                }
+            } catch (err) {
+                console.error(err)
+            }
+        }
+        fetchUser()
+    }, [])
+
     const handleCoverChange = (e) => {
     const file = e.target.files[0]
     if (file) {

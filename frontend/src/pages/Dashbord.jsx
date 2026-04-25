@@ -126,7 +126,7 @@ export default function DashbordPage() {
                     </span>
                 </p>
 
-                {/* <a href="http://127.0.0.1:8000/accounts/google/login/?process=login"
+                <a href="http://127.0.0.1:8000/accounts/google/login/?process=login"
                     onMouseEnter={() => setHovered_goo(true)}
                     onMouseLeave={() => { setHovered_goo(false); setPressed_goo(false) }}
                     onMouseDown={() => setPressed_goo(true)}
@@ -150,7 +150,7 @@ export default function DashbordPage() {
                 >
                     <FcGoogle size={20} />
                     Login with Google
-                </a> */}
+                </a>
             </div>
         </div>
     )

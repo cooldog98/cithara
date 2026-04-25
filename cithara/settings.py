@@ -50,6 +50,11 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
 SITE_ID = 1
 
 SOCIALACCOUNT_PROVIDERS = {
@@ -76,7 +81,7 @@ ROOT_URLCONF = 'cithara.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -149,15 +154,20 @@ CORS_ALLOWED_ORIGINS = [
 ]
 CORS_ALLOW_CREDENTIALS = True
 
-LOGIN_REDIRECT_URL = 'http://localhost:5173/generate'
-ACCOUNT_SIGNUP_REDIRECT_URL = 'http://localhost:5173/generate'
+LOGIN_REDIRECT_URL = 'http://127.0.0.1:5173/generate'
+ACCOUNT_SIGNUP_REDIRECT_URL = 'http://127.0.0.1:5173/generate'
 SOCIALACCOUNT_LOGIN_ON_GET = True
 
+ACCOUNT_SIGNUP_FIELDS = []
 SOCIALACCOUNT_AUTO_SIGNUP = True
-ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
 SOCIALACCOUNT_EMAIL_REQUIRED = False
-# ACCOUNT_USERNAME_REQUIRED = False
-# ACCOUNT_EMAIL_REQUIRED = False
+SOCIALACCOUNT_USERNAME_REQUIRED = False
+
+SOCIALACCOUNT_ADAPTER = 'songs.adapter.MySocialAccountAdapter'
+SOCIALACCOUNT_FORMS = {}
+ACCOUNT_ADAPTER = 'allauth.account.adapter.DefaultAccountAdapter'
+SOCIALACCOUNT_EMAIL_AUTHENTICATION = True
+SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = True
 
 SESSION_COOKIE_SAMESITE = 'Lax'
 SESSION_COOKIE_SECURE = False

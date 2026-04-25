@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+    <form id="auto-form" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+    </form>
+    <script>
+        document.getElementById('auto-form').submit();
+    </script>
+</body>
+</html>
