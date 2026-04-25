@@ -15,6 +15,7 @@ class GenerationResult:
     task_id: str
     status: str
     audio_url: Optional[str] = None
+    cover_image: Optional[str] = None
     error: Optional[str] = None
 
 class SongGeneratorStrategy(ABC):

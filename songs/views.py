@@ -59,15 +59,18 @@ def api_generate(request):
             audio_url=result.audio_url,
         )
 
-        if result.status == 'SUCCESS':
-            song = Song.objects.create(
-                user=user,
-                request=song_request,
-                title=data.get('title'),
-                cover_image=cover_image,
-            )
-            library, _ = SongLibrary.objects.get_or_create(user=user)
-            library.songs.add(song)
+        # Create the song record immediately so it appears in Library
+        # while Suno is still processing (audio_url can be attached later).
+        song, _ = Song.objects.get_or_create(
+            request=song_request,
+            defaults={
+                'user': user,
+                'title': data.get('title'),
+                'cover_image': cover_image,
+            },
+        )
+        library, _ = SongLibrary.objects.get_or_create(user=user)
+        library.songs.add(song)
 
         return JsonResponse({
             'task_id': result.task_id,
@@ -80,20 +83,24 @@ def api_generate(request):
 def api_status(request, task_id):
     generator = get_generator()
     result = generator.get_status(task_id)
+    job = GenerationJob.objects.filter(task_id=task_id).first()
+
+    if job:
+        job.status = result.status
+        job.audio_url = result.audio_url
+        if result.error:
+            job.error = result.error
+        job.save()
 
     if result.status == 'SUCCESS' and result.audio_url:
-        job = GenerationJob.objects.filter(task_id=task_id).first()
-        if job and job.status != 'SUCCESS':
-            job.status = 'SUCCESS'
-            job.audio_url = result.audio_url
-            job.save()
-
-            user = User.objects.first()
-            song = Song.objects.create(
-                user=user,
+        if job:
+            user = job.request.user
+            song, _ = Song.objects.get_or_create(
                 request=job.request,
-                title=job.request.title,
-                cover_image_url=result.cover_image,  # ← เพิ่ม
+                defaults={
+                    'user': user,
+                    'title': job.request.title,
+                },
             )
             library, _ = SongLibrary.objects.get_or_create(user=user)
             library.songs.add(song)

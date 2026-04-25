@@ -1,0 +1,10 @@
+{
+  "endpoint": "GET /api/status/0fdc679d5e97be8e8fe733c6b500ee2c/",
+  "mode": "suno",
+  "response": {
+    "task_id": "0fdc679d5e97be8e8fe733c6b500ee2c",
+    "status": "PENDING",
+    "audio_url": null
+  },
+  "note": "Status polling works and returns task details. The task is still processing."
+}
