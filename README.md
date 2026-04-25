@@ -39,8 +39,8 @@ The project is designed around a small music domain:
 
 | Method | Result |
 | --- | --- |
-| mock | ![Mock](./image copy 2.png) |
-| suno | ![Suno](./image copy.png) |
+| mock | image copy 2.png |
+| suno | image copy.png |
 
 ## CRUD Functionality
 ![CRUD](./image-2.png)
