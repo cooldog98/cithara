@@ -1,142 +1,259 @@
-# Cithara Music AI (Django Project)
+# Cithara
 
-## Project Overview
+AI music generation web app built with Django and React. Users can create songs from prompts, manage a personal library, organize playlists, and share tracks through a simple web interface.
 
-This project is a Django-based web application for AI-generated music.
-Users can generate songs based on structured inputs, manage their personal song library, and share songs with others באמצעות shareable links.
+![Cithara preview](./image.png)
 
-The system is designed based on domain-driven concepts, ensuring clear separation between business logic and implementation.
+## Overview
 
----
+Cithara is a full-stack project with:
 
-## Domain Concepts
+- `Django` as the backend API and authentication layer
+- `React + Vite` as the frontend
+- `SQLite` for local development
+- `django-allauth` for Google sign-in support
+- A pluggable song generation flow with `mock` and `suno` strategies
 
-The system consists of the following core domain entities:
+The project is designed around a small music domain:
 
-* **User**
-  Authenticated user of the system (Django built-in).
-  Can act as both a Creator and a Listener.
-
-* **Song**
-  Represents a generated music track.
-  Each song belongs to exactly one user and one generation request.
-
-* **SongGenerationRequest**
-  Stores input parameters used to generate a song
-  (title, mood, occasion, singer gender, prompt).
-
-* **SongLibrary**
-  Represents a user's personal collection of songs.
-
-* **ShareLink**
-  A shareable link that allows other users to access a song.
-
----
-
-## Relationships (Summary)
-
-* One User → Many Songs
-* One User → Many SongGenerationRequests
-* One Song ↔ One SongGenerationRequest
-* One Song → Many ShareLinks
-* One User → One SongLibrary
-
----
-
-## UML Diagram
-
-> *![alt text](image-1.png)*
-
----
-
-## Setup Instructions
-
-### 1. Clone the repository
-
-```
-git clone https://github.com/cooldog98/music_ai.git
-cd music_ai
-```
-
-### 2. Install dependencies
-
-```
-pip install django
-```
-
-### 3. Apply database migrations
-
-```
-python3 manage.py migrate
-```
-
-### 4. Run the development server
-
-```
-python3 manage.py runserver
-```
-
----
-
-## Access the Application
-
-* Main page: http://127.0.0.1:8000/
-* Admin panel: http://127.0.0.1:8000/admin
-* view all songs: http://127.0.0.1:8000/songs/
-
----
-
-## Admin Usage (CRUD Operations)
-
-This project uses Django Admin to demonstrate CRUD operations.
-
-You can:
-
-* Create new songs and generation requests
-* View stored data
-* Update existing records
-* Delete records
-
-To access admin:
-
-```
-python3 manage.py createsuperuser
-```
-
----
+- `SongGenerationRequest` stores prompt, mood, occasion, and singer settings
+- `GenerationJob` tracks generation status and returned audio URL
+- `Song` stores the generated result
+- `SongLibrary` groups a user's songs
+- `Playlist` lets users organize songs into collections
+- `ShareLink` exists in the domain model for shareable access
 
 ## Features
 
-* AI song generation request tracking
-* Persistent song storage
-* Personal song library management
-* Shareable song links
-* Full CRUD operations via Django Admin
+- Register and login with username/password
+- Google login via `django-allauth`
+- Generate songs from structured prompts
+- Upload custom cover images
+- Save songs into a personal library
+- Create playlists and add/remove songs
+- Copy share links for songs
+- Download generated audio
+- Switch generation backend between `mock` and `suno`
 
----
+## Screenshots
 
-## Design Decisions
-
-* **One Song = One Mood, One Occasion**
-  Ensures consistency in AI-generated output and simplifies input handling.
-
-* **Song → User (Direct Relationship)**
-  Even though songs are part of a library, ownership is modeled explicitly for access control.
-
-* **Regeneration = New Request**
-  Each generation is treated as a new event to ensure traceability and accurate history tracking.
-
----
-
-## Technologies Used
-
-* Python 3
-* Django
+| Method | Result |
+| --- | --- |
+| mock | ![mock screenshot](image%20copy%202.png) |
+| suno | ![suno screenshot](image%20copy.png) |
 
 ## CRUD Functionality
-> *![alt text](image-2.png)*
+![CRUD](./image-2.png)
 
-## Design Decision: User Roles
-In the initial domain model, user roles such as creator and listener were introduced to simplify the user stories. However, during implementation, it was observed that both roles share the same capabilities: users can create songs, generate music, and listen to songs without any restriction.
+## Tech Stack
 
-Since there is no difference in permissions or system behavior between these roles, maintaining separate user roles would introduce unnecessary complexity and redundancy. Therefore, the role distinction was removed, and a unified User entity was used instead.
+### Backend
+
+- Python 3
+- Django 6
+- django-allauth
+- django-cors-headers
+- python-dotenv
+- requests
+- Pillow
+- SQLite
+
+### Frontend
+
+- React
+- Vite
+- Axios
+- React Router
+- React Icons
+
+## Project Structure
+
+```text
+cithara/
+├── cithara/               # Django project settings
+├── frontend/              # React + Vite frontend
+│   └── src/
+│       ├── components/
+│       ├── context/
+│       ├── pages/
+│       └── styles/
+├── songs/                 # Main backend app
+│   ├── generation/        # Mock and Suno generation strategies
+│   ├── models/            # Domain models
+│   ├── views.py           # API endpoints
+│   └── urls.py
+├── db.sqlite3
+├── .env
+├── manage.py
+└── README.md
+```
+
+## API Endpoints
+
+### Authentication
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/login/` | Login with username and password |
+| POST | `/api/logout/` | Logout current user |
+| POST | `/api/register/` | Register a new user |
+| GET | `/api/me/` | Get current authenticated user info |
+
+### Songs
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/songs/?username=<username>` | Get all songs for a user |
+| POST | `/api/generate/` | Generate a new song |
+| GET | `/api/status/<task_id>/` | Check song generation status |
+| GET | `/api/songs/<song_id>/` | Get song detail by ID |
+| DELETE | `/api/songs/<song_id>/delete/` | Delete a song |
+
+### Playlists
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/playlists/?username=<username>` | Get all playlists for a user |
+| POST | `/api/playlists/` | Create a new playlist |
+| GET | `/api/playlists/<playlist_id>/` | Get playlist detail with songs |
+| DELETE | `/api/playlists/<playlist_id>/` | Delete a playlist |
+| POST | `/api/playlists/<playlist_id>/songs/` | Add a song to a playlist |
+| DELETE | `/api/playlists/<playlist_id>/songs/` | Remove a song from a playlist |
+
+## Local Setup
+
+### 1. Clone the repository
+
+```bash
+git clone <your-repo-url>
+cd cithara
+```
+
+### 2. Create a virtual environment
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+### 3. Install backend dependencies
+
+```bash
+pip install django django-allauth django-cors-headers python-dotenv requests pillow
+```
+
+### 4. Configure environment variables
+
+Create a `.env` file in the project root:
+
+```env
+GENERATOR_STRATEGY=mock
+SUNO_API_KEY=your_suno_api_key
+```
+
+`GENERATOR_STRATEGY` options:
+
+- `mock` for local demo mode
+- `suno` to call the Suno API
+
+### 5. Run database migrations
+
+```bash
+python3 manage.py migrate
+```
+
+### 6. Install frontend dependencies
+
+```bash
+cd frontend
+npm install
+cd ..
+```
+
+### 7. Start the backend
+
+```bash
+python3 manage.py runserver
+```
+
+Backend runs at `http://127.0.0.1:8000`
+
+### 8. Start the frontend
+
+In another terminal:
+
+```bash
+cd frontend
+npm run dev
+```
+
+Frontend runs at `http://localhost:5173` or `http://127.0.0.1:5173`
+
+<!-- ## Authentication
+
+### Username / Password
+
+The app supports local registration and login from the frontend landing page.
+
+### Google Login
+
+Google sign-in is wired through `django-allauth`. To make it work locally, you need:
+
+1. A Google OAuth client
+2. A configured `SocialApp` entry in Django admin
+3. The correct callback URL in Google Cloud Console
+
+Typical local callback URL:
+
+```text
+http://127.0.0.1:8000/accounts/google/login/callback/
+```
+
+You also need to ensure the Django `Site` and the Google `SocialApp` are linked correctly. -->
+
+## Song Generation Modes
+
+### Mock Mode
+
+`mock` mode returns a local sample audio file immediately. This is useful for UI development and demos.
+
+### Suno Mode
+
+`suno` mode sends generation requests to the Suno API and polls for status updates until audio becomes available.
+
+## Main Pages
+
+- `/` login and register page
+- `/generate` create a new song
+- `/library` browse generated songs
+- `/playlists` manage playlists
+- `/playlists/:id` playlist details and playback
+- `/share/:id` open a shared song page
+- `/admin` Django admin panel
+
+## Example Development Workflow
+
+```bash
+python3 manage.py migrate
+python3 manage.py runserver
+cd frontend
+npm install
+npm run dev
+```
+
+Then open:
+
+- Frontend: `http://127.0.0.1:5173`
+- Backend: `http://127.0.0.1:8000`
+- Admin: `http://127.0.0.1:8000/admin`
+
+## Admin
+
+Create an admin account with:
+
+```bash
+python3 manage.py createsuperuser
+```
+
+Use Django admin to inspect users, songs, generation requests, jobs, and related data.
+
