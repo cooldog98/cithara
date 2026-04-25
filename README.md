@@ -37,10 +37,13 @@ The project is designed around a small music domain:
 
 ## Screenshots
 
-| Page | Preview |
+| Method | Result |
 | --- | --- |
-| Domain / UML | ![UML](./image-1.png) |
-| CRUD / Admin | ![Admin](./image-2.png) |
+| mock | ![Mock](./image copy 2.png) |
+| suno | ![Suno](./image copy.png) |
+
+## CRUD Functionality
+![CRUD](./image-2.png)
 
 ## Tech Stack
 
@@ -68,21 +71,54 @@ The project is designed around a small music domain:
 ```text
 cithara/
 ├── cithara/               # Django project settings
-├── songs/                 # Main backend app
-│   ├── generation/        # Mock and Suno generation strategies
-│   ├── models/            # Domain models
-│   ├── views.py           # API endpoints
-│   └── urls.py
 ├── frontend/              # React + Vite frontend
 │   └── src/
 │       ├── components/
 │       ├── context/
 │       ├── pages/
 │       └── styles/
+├── songs/                 # Main backend app
+│   ├── generation/        # Mock and Suno generation strategies
+│   ├── models/            # Domain models
+│   ├── views.py           # API endpoints
+│   └── urls.py
 ├── db.sqlite3
+├── .env
 ├── manage.py
 └── README.md
 ```
+
+## API Endpoints
+
+### Authentication
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/login/` | Login with username and password |
+| POST | `/api/logout/` | Logout current user |
+| POST | `/api/register/` | Register a new user |
+| GET | `/api/me/` | Get current authenticated user info |
+
+### Songs
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/songs/?username=<username>` | Get all songs for a user |
+| POST | `/api/generate/` | Generate a new song |
+| GET | `/api/status/<task_id>/` | Check song generation status |
+| GET | `/api/songs/<song_id>/` | Get song detail by ID |
+| DELETE | `/api/songs/<song_id>/delete/` | Delete a song |
+
+### Playlists
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/playlists/?username=<username>` | Get all playlists for a user |
+| POST | `/api/playlists/` | Create a new playlist |
+| GET | `/api/playlists/<playlist_id>/` | Get playlist detail with songs |
+| DELETE | `/api/playlists/<playlist_id>/` | Delete a playlist |
+| POST | `/api/playlists/<playlist_id>/songs/` | Add a song to a playlist |
+| DELETE | `/api/playlists/<playlist_id>/songs/` | Remove a song from a playlist |
 
 ## Local Setup
 
@@ -153,7 +189,7 @@ npm run dev
 
 Frontend runs at `http://localhost:5173` or `http://127.0.0.1:5173`
 
-## Authentication
+<!-- ## Authentication
 
 ### Username / Password
 
@@ -173,7 +209,7 @@ Typical local callback URL:
 http://127.0.0.1:8000/accounts/google/login/callback/
 ```
 
-You also need to ensure the Django `Site` and the Google `SocialApp` are linked correctly.
+You also need to ensure the Django `Site` and the Google `SocialApp` are linked correctly. -->
 
 ## Song Generation Modes
 
@@ -221,20 +257,3 @@ python3 manage.py createsuperuser
 
 Use Django admin to inspect users, songs, generation requests, jobs, and related data.
 
-## Notes
-
-- The default local database is `SQLite`
-- Media files are served from `cithara/media/` in development
-- CORS is configured for the Vite frontend during local development
-- If you use Google login, make sure frontend and backend hosts match your OAuth setup
-
-## Future Improvements
-
-- Add a `requirements.txt` or `pyproject.toml`
-- Add automated tests for auth and generation flows
-- Improve shared-song access rules
-- Add deployment instructions for production
-
-## License
-
-This project is for educational and development use unless you define a separate license for distribution.
