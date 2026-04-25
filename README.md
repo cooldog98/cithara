@@ -233,9 +233,49 @@ Do not mix `localhost` and `127.0.0.1`, because OAuth redirect/session behavior 
 
 `mock` mode returns a local sample audio file immediately. This is useful for UI development and demos.
 
+How to run in `mock` mode:
+
+1. Set in `.env`:
+   - `GENERATOR_STRATEGY=mock`
+2. Start backend:
+   - `python3 manage.py runserver 127.0.0.1:8000`
+3. Start frontend:
+   - `cd frontend && npm run dev`
+
 ### Suno Mode
 
 `suno` mode sends generation requests to the Suno API and polls for status updates until audio becomes available.
+
+How to run in `suno` mode:
+
+1. Set in `.env`:
+   - `GENERATOR_STRATEGY=suno`
+   - `SUNO_API_KEY=<your_real_suno_api_key>`
+2. Restart backend so new env values are loaded:
+   - `python3 manage.py runserver 127.0.0.1:8000`
+3. Start frontend:
+   - `cd frontend && npm run dev`
+
+If `SUNO_API_KEY` is missing or invalid, Suno generation requests will fail.
+
+## Submission Checklist
+
+- Merge all required work into `main` (or `master`) before submission.
+- Do not commit real secrets (especially `SUNO_API_KEY`) into git.
+- Keep secrets in `.env` only. This repository ignores `.env` via `.gitignore`.
+
+## Evidence of Running Modes
+
+Provide links to your own run evidence before submitting:
+
+1. Mock generation works (successful output/audio)
+2. Suno generation returns a `task_id` and status/details can be fetched
+
+Example evidence format:
+
+- Mock mode run evidence: [`docs/evidence/mock-generation-success.json`](docs/evidence/mock-generation-success.json)
+- Suno mode task creation (`task_id`) evidence: [`docs/evidence/suno-generation-attempt.json`](docs/evidence/suno-generation-attempt.json)
+- Suno mode status/details evidence (`/api/status/<task_id>/`): [`docs/evidence/suno-status-details.json`](docs/evidence/suno-status-details.json)
 
 ## Main Pages
 

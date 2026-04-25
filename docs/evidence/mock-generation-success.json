@@ -1,0 +1,13 @@
+{
+  "endpoint": "POST /api/generate/",
+  "mode": "mock",
+  "request_summary": {
+    "username": "patthiaon",
+    "title": "README Mock Evidence"
+  },
+  "response": {
+    "task_id": "mock-13baa7ae-6386-46e5-ae52-99c57ba50ff2",
+    "status": "SUCCESS",
+    "audio_url": "http://127.0.0.1:8000/media/songs/songformock/mock_song.mp3"
+  }
+}

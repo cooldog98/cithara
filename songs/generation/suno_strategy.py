@@ -53,6 +53,7 @@ class SunoSongGeneratorStrategy(SongGeneratorStrategy):
             inner = data.get("data") or {}
             status = inner.get("status", "PENDING")
             audio_url = None
+            cover_image = None
             response_data = inner.get("response") or {}
             suno_data = response_data.get("sunoData", [])
             if suno_data:

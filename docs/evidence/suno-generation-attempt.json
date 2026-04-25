@@ -1,0 +1,13 @@
+{
+  "endpoint": "POST /api/generate/",
+  "mode": "suno",
+  "request_summary": {
+    "username": "patthiaon",
+    "title": "README Suno Evidence New Token"
+  },
+  "response": {
+    "task_id": "0fdc679d5e97be8e8fe733c6b500ee2c",
+    "status": "PENDING",
+    "audio_url": null
+  }
+}
